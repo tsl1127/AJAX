@@ -12,6 +12,7 @@ myButton.addEventListener('click',(e)=>{
                 console.log(request.responseText)
                 let string = request.responseText
                 let object = window.JSON.parse(string)  //把符合JSON语法的字符串转换成JS对应的值
+                //JSON.parse是浏览器提供的
                 console.log(typeof object)
                 console.log(object)
                 console.log(object.note.to)
@@ -32,7 +33,7 @@ myButton.addEventListener('click',(e)=>{
 
     request.open(
         'GET',   //也可以改成POST/PUT/DELETE等
-        '/xxx'
+        'http://localhost:8002/xxx'
 ) //配置request
     
     request.send()
