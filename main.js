@@ -9,10 +9,21 @@ myButton.addEventListener('click',(e)=>{
             console.log('请求响应都完毕了')
             if(request.status>=200&&request.status<300){
                 console.log('请求成功')
-                let parser = new DOMParser();
-                let xmlDoc = parser.parseFromString(request.responseText,"text/xml")
-                let c=xmlDoc.getElementsByTagName('to')[0].textContent
-                console.log(c)
+                console.log(request.responseText)
+                let string = request.responseText
+                let object = window.JSON.parse(string)  //把符合JSON语法的字符串转换成JS对应的值
+                console.log(typeof object)
+                console.log(object)
+                console.log(object.note.to)
+                console.log(object.note.from)
+
+
+                // let parser = new DOMParser();
+                // let xmlDoc = parser.parseFromString(request.responseText,"text/xml")
+                // let c=xmlDoc.getElementsByTagName('to')[0].textContent
+                // let title = xmlDoc.getElementsByTagName('heading')[0].textContent  //获取标题
+                // console.log(c)
+                // console.log(title)
             }else if(request.status>=400){
                 console.log('请求失败')
             }

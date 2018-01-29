@@ -35,15 +35,17 @@ var server = http.createServer(function(request, response){
     response.end()
   }else if(path === '/xxx'){
     response.statusCode=200
-    response.setHeader('Content-Type', 'text/xml;charset=uft-8')
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
     response.write(`
-    <note>
-    <to>Tove</to>
-    <from>Jani</from>
-    <heading>Reminder</heading>
-    <body>Don't forget me this weekend!</body>
-    </note>
-    `)     //以上是XML格式的数据
+    {
+      "note":{
+        "to":"小谷",
+        "from":"方方",
+        "heading":"打招呼",
+        "content":"hi"
+      }
+    }
+    `)     
     response.end()
   }
   else{
@@ -58,3 +60,4 @@ var server = http.createServer(function(request, response){
 
 server.listen(port)
 console.log('监听 ' + port + ' 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:' + port)
+
