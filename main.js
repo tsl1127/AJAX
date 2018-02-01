@@ -1,43 +1,40 @@
-myButton.addEventListener('click',(e)=>{
-    let request = new XMLHttpRequest()
-    // request.onreadystatechange = ()=>{
-    //     console.log(request.readyState)
-    // }  //只要变了，就打印出来
-    
-    request.onreadystatechange = ()=>{
-        if(request.readyState===4){
-            console.log('请求响应都完毕了')
-            if(request.status>=200&&request.status<300){
-                console.log('请求成功')
-                console.log(request.responseText)
-                let string = request.responseText
-                let object = window.JSON.parse(string)  //把符合JSON语法的字符串转换成JS对应的值
-                //JSON.parse是浏览器提供的
-                console.log(typeof object)
-                console.log(object)
-                console.log(object.note.to)
-                console.log(object.note.from)
+window.jQuery = function(nodeOrSelector){
+    let nodes={}
+    nodes.addClass = function(){}
+    nodes.html = function(){}
+    return nodes
+}
 
-
-                // let parser = new DOMParser();
-                // let xmlDoc = parser.parseFromString(request.responseText,"text/xml")
-                // let c=xmlDoc.getElementsByTagName('to')[0].textContent
-                // let title = xmlDoc.getElementsByTagName('heading')[0].textContent  //获取标题
-                // console.log(c)
-                // console.log(title)
-            }else if(request.status>=400){
-                console.log('请求失败')
-            }
-        }
-    } 
-
+window.jQuery.ajax=function(url,method,body,successFn,failFn){    //要加路径、方法、第四部分内容
+    let request = new XMLHttpRequest()    
     request.open(
-        'GET',   //也可以改成POST/PUT/DELETE等
-        'http://localhost:8002/xxx'
+        method,   //也可以改成POST/PUT/DELETE等
+        url
 ) //配置request
-    
-    request.send()
-    // setInterval(()=>{
-    //  console.log(request.readyState)   
-    // },1) //每1ms问一次
+
+request.onreadystatechange = ()=>{
+    if(request.readyState===4){
+        if(request.status>=200&&request.status<300){
+            successFn.call(undefined,request.responseText) 
+        }else if(request.status>=400){
+            failFn.call(undefined,request)
+        }
+    }
+}
+   
+    request.send(body)
+}
+
+window.$=window.jQuery
+
+
+
+
+myButton.addEventListener('click',(e)=>{
+    window.jQuery.ajax(
+        '/xxx',
+        'POST',
+        'a=1&b=2',
+        (responseText)=>{console.log(1)},
+        (request)=>{console.log(2)})
 })
