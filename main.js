@@ -5,13 +5,23 @@ window.jQuery = function(nodeOrSelector){
     return nodes
 }
 
-window.jQuery.ajax=function(options){ 
-    let url = options.url   
-    let method = options.method
-    let body = options.body
-    let successFn = options.successFn
-    let failFn = options.failFn
-    let headers = options.headers
+window.jQuery.ajax=function({url,method,body,successFn,failFn,headers}){   //本来是options
+    // let url
+    // if(arguments.length===1){
+    //     url = options.url   
+    // }else if(arguments.length===2){
+    //     url = arguments[0]
+    //     options = arguments[1]
+    // }
+
+    // let method = options.method
+    // let body = options.body
+    // let successFn = options.successFn
+    // let failFn = options.failFn
+    // let headers = options.headers
+ //ES6来写   解构赋值
+//  let {url,method,body,successFn,failFn,headers} =options   //与上面的参数等价替换
+
 
 
     let request = new XMLHttpRequest()    
