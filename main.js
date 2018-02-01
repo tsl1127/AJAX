@@ -50,31 +50,31 @@
 
 // window.$=window.jQuery
 
-function f1(responseText){}
-function f2(responseText){}
+// function success(responseText){
+//     console.log(responseText)
+// }
+// function fail(request){
+//     console.log(request)
+// }
+
+
+// myButton.addEventListener('click',(e)=>{
+//     $.ajax({
+//         url:'/xxx',
+//         method:'GET'
+//     }).then(success,fail)
+// })
 
 
 myButton.addEventListener('click',(e)=>{
-    // let obj ={
-    //     url:'/xxx',
-    //     method:'GET',
-    //     successFn:()=>{},
-    //     failFn:()=>{}
-    // }
-    // window.jQuery.ajax(obj)
-
-    window.jQuery.ajax({
-        url:'/ff',
-        method:'GET',
-        success:(x)=>{
-            console.log(x)    //x其实是callback回来的request.responseText
-            f1.call(undefined,x)   //x其实是callback回来的responseText（上面的f1里面的）
-            f2.call(undefined,x)   //x其实是callback回来的responseText（上面的f2里面的）
-        },
-        error:(x)=>{
-            console.log(x)  //x其实是callback回来的request
-            console.log(x.status)
-            console.log(x.responseText)
-        }
-    })
-})
+    $.ajax({
+        url:'/xxx',
+        method:'GET'
+    }).then(
+    (responseText)=>{console.log(responseText)},
+    (request)=>{console.log(request)}
+     ).then(
+        (responseText)=>{console.log(responseText)},
+        (request)=>{console.log(request)}  
+     )
+})  //好处：不用起成功或失败的名字;可以then多次
